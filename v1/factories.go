@@ -14,6 +14,7 @@ import (
 	eagerbroker "github.com/RichardKnop/machinery/v1/brokers/eager"
 	gcppubsubbroker "github.com/RichardKnop/machinery/v1/brokers/gcppubsub"
 	brokeriface "github.com/RichardKnop/machinery/v1/brokers/iface"
+	kafkabroker "github.com/RichardKnop/machinery/v1/brokers/kafka"
 	redisbroker "github.com/RichardKnop/machinery/v1/brokers/redis"
 	sqsbroker "github.com/RichardKnop/machinery/v1/brokers/sqs"
 
@@ -35,6 +36,10 @@ func BrokerFactory(cnf *config.Config) (brokeriface.Broker, error) {
 
 	if strings.HasPrefix(cnf.Broker, "amqps://") {
 		return amqpbroker.New(cnf), nil
+	}
+
+	if strings.HasPrefix(cnf.Broker, "kafka://") {
+		return kafkabroker.New(cnf), nil
 	}
 
 	if strings.HasPrefix(cnf.Broker, "redis://") {

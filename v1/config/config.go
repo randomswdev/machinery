@@ -30,6 +30,10 @@ var (
 			BindingKey:    "machinery_task",
 			PrefetchCount: 3,
 		},
+		Kafka: &KafkaConfig{
+			Topic:  "machinery_topic",
+			DelayedTopic: "machinery_delayed_topic",
+		},
 		DynamoDB: &DynamoDBConfig{
 			TaskStatesTable: "task_states",
 			GroupMetasTable: "group_metas",
@@ -57,6 +61,7 @@ type Config struct {
 	ResultBackend   string           `yaml:"result_backend" envconfig:"RESULT_BACKEND"`
 	ResultsExpireIn int              `yaml:"results_expire_in" envconfig:"RESULTS_EXPIRE_IN"`
 	AMQP            *AMQPConfig      `yaml:"amqp"`
+	Kafka           *KafkaConfig     `yaml:"kafka"`
 	SQS             *SQSConfig       `yaml:"sqs"`
 	Redis           *RedisConfig     `yaml:"redis"`
 	GCPPubSub       *GCPPubSubConfig `yaml:"-" ignored:"true"`
@@ -77,6 +82,12 @@ type AMQPConfig struct {
 	QueueBindingArgs QueueBindingArgs `yaml:"queue_binding_args" envconfig:"AMQP_QUEUE_BINDING_ARGS"`
 	BindingKey       string           `yaml:"binding_key" envconfig:"AMQP_BINDING_KEY"`
 	PrefetchCount    int              `yaml:"prefetch_count" envconfig:"AMQP_PREFETCH_COUNT"`
+}
+
+// KafkaConfig wraps Kafka related configuration
+type KafkaConfig struct {
+	Topic        string `yaml:"topic" envconfig:"KAFKA_TOPIC"`
+	DelayedTopic string `yaml:"delayed_topic" envconfig:"KAFKA_DELAYED_TOPIC"`
 }
 
 // DynamoDBConfig wraps DynamoDB related configuration
