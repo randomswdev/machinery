@@ -1,5 +1,6 @@
 ---
-broker: 'amqp://guest:guest@localhost:5672/'
+#broker: 'amqp://guest:guest@localhost:5672/'
+broker: 'kafka://localhost:9092/'
 #broker: 'redis://localhost:6379'
 #broker: 'https://sqs.us-west-2.amazonaws.com/123456789012'
 default_queue: machinery_tasks
@@ -14,3 +15,7 @@ amqp:
   exchange: machinery_exchange
   exchange_type: direct
   prefetch_count: 3
+
+kafka:
+  topic: machinery_topic
+  delayed_topic: machinery_delayed_topic

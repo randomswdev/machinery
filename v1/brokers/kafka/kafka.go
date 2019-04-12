@@ -31,7 +31,7 @@ func New(cnf *config.Config) iface.Broker {
 }
 
 func (b *Broker) StartConsuming(consumerTag string, concurrency int, p iface.TaskProcessor) (bool, error) {
-
+	return false, nil
 }
 
 func (b *Broker) StopConsuming() {
