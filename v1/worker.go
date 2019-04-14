@@ -13,7 +13,7 @@ import (
 	"github.com/RichardKnop/machinery/v1/retry"
 	"github.com/RichardKnop/machinery/v1/tasks"
 	"github.com/RichardKnop/machinery/v1/tracing"
-	"github.com/opentracing/opentracing-go"
+	opentracing "github.com/opentracing/opentracing-go"
 )
 
 // Worker represents a single worker process
@@ -57,6 +57,12 @@ func (worker *Worker) LaunchAsync(errorsChan chan<- error) {
 		log.INFO.Printf("  - ExchangeType: %s", cnf.AMQP.ExchangeType)
 		log.INFO.Printf("  - BindingKey: %s", cnf.AMQP.BindingKey)
 		log.INFO.Printf("  - PrefetchCount: %d", cnf.AMQP.PrefetchCount)
+	}
+	if cnf.Kafka != nil {
+		log.INFO.Printf("- Kafka")
+		log.INFO.Printf("  - Topic: %s", cnf.Kafka.Topic)
+		log.INFO.Printf("  - Delayed Topic: %s", cnf.Kafka.DelayedTopic)
+		log.INFO.Printf("  - Consumer Group: %s", cnf.Kafka.ConsumerGroup)
 	}
 
 	// Goroutine to start broker consumption and handle retries when broker connection dies

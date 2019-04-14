@@ -31,8 +31,9 @@ var (
 			PrefetchCount: 3,
 		},
 		Kafka: &KafkaConfig{
-			Topic:  "machinery_topic",
-			DelayedTopic: "machinery_delayed_topic",
+			Topic:         "machinery_topic",
+			DelayedTopic:  "machinery_delayed_topic",
+			ConsumerGroup: "machinery_consumer_group",
 		},
 		DynamoDB: &DynamoDBConfig{
 			TaskStatesTable: "task_states",
@@ -86,8 +87,9 @@ type AMQPConfig struct {
 
 // KafkaConfig wraps Kafka related configuration
 type KafkaConfig struct {
-	Topic        string `yaml:"topic" envconfig:"KAFKA_TOPIC"`
-	DelayedTopic string `yaml:"delayed_topic" envconfig:"KAFKA_DELAYED_TOPIC"`
+	Topic         string `yaml:"topic" envconfig:"KAFKA_TOPIC"`
+	DelayedTopic  string `yaml:"delayed_topic" envconfig:"KAFKA_DELAYED_TOPIC"`
+	ConsumerGroup string `yaml:"consumer_group" envconfig:"KAFKA_CONSUMER_GROUP"`
 }
 
 // DynamoDBConfig wraps DynamoDB related configuration

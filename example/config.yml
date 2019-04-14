@@ -19,3 +19,4 @@ amqp:
 kafka:
   topic: machinery_topic
   delayed_topic: machinery_delayed_topic
+  consumer_group: machinery_consumer_group
